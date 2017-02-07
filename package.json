@@ -1,0 +1,35 @@
+{
+  "name": "codesmith-solo-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lemerodrigo/codesmith-solo-project.git"
+  },
+  "keywords": [],
+  "author": "Rodrigo Leme de Mello",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lemerodrigo/codesmith-solo-project/issues"
+  },
+  "homepage": "https://github.com/lemerodrigo/codesmith-solo-project",
+  "devDependencies": {
+    "babel-core": "^6.22.1",
+    "babel-loader": "^6.2.10",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-react": "^6.22.0",
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.3.0"
+  },
+  "dependencies": {
+    "express": "^4.14.1",
+    "mongoose": "^4.8.1",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "socket.io": "^1.7.2"
+  }
+}

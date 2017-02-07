@@ -1,0 +1,41 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+#head {
+  height: 50px;
+  width: 50px;
+  position: absolute;
+  background-color: #000000;
+}
+
+h1 {
+  position: absolute;
+  color: red;
+  top: 250;
+  left: 250;
+  font-size: 50px;
+  font-weight: bold;
+}
+
+.body {
+  height: 50px;
+  width: 50px;
+  position: absolute;
+  background-color: #ff0000;
+}
+
+#board {
+  height: 700px;
+  width: 700px;
+  background: #ccc;
+  /*border: 1px black solid;*/
+  position: relative;
+}
+
+#apple {
+  height: 50px;
+  width: 50px;
+  position: absolute;
+}
