@@ -1,12 +1,40 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Snake Multiplayer Game</title>
+  <title>Multiplayer Game</title>
   <script src="node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const userName = prompt("Please enter your name:", "Rodrigo");
+
+    if (userName !== null) {
+      const socket = io();
+
+      // Sending to server.
+      socket.emit('join', {
+        name: userName
+      });
+
+      // Just for this client.
+      socket.on('joined', () => {
+        console.log('This client joined the game.');
+      });
+
+      // All.
+      socket.on('onlineUsers', (n, names) => {
+        let html = 'Online users: ' + n;
+        names.forEach((name) => {
+          html += ' <span>' + name + '</span> ';
+        })
+        $('#onlineUsers').html(html);
+      });
+    }
+  </script>
   <link rel="stylesheet" href="app/assets/css/main.css">
 </head>
 <body>
-    <div id="main-container"></div>
+  <div id="onlineUsers"></div>
+  <div id="main-container"></div>
 </body>
-<script src="dist/webpack-bundle.js"></script>
+<script src="build/webpack-bundle.js"></script>
 </html> 

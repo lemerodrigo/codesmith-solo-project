@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        console.log('Client init...');
+        var socket = io();
+
+        socket.emit('data', 'just a string');
+
+// io.on('connection', function(socket){
+//   console.log('a user connected');
+//   socket.on('disconnect', function(){
+//     console.log('user disconnected');
+//   });
+// });
+        // socket.on('welcome', function(data) {
+        //     // Respond with a message including this clients' id sent from the server
+        //     socket.emit('i am client', {data: 'foo!', id: data.id});
+        // });
+        // socket.on('error', console.error.bind(console));
+        // socket.on('message', console.log.bind(console));
+
+    </script>
+</head>
+<body>
+    <ul id='messages'></ul>
+</body>
+</html>

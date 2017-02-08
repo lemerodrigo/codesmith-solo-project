@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "express": "^4.14.1",
+    "forwarded-for": "^1.0.1",
     "jquery": "^3.1.1",
     "mongoose": "^4.8.1",
     "react": "^15.4.2",
