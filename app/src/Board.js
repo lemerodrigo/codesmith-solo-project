@@ -10,10 +10,9 @@ class Board {
         this.totalCols = null;
         this.totalRows = null;
         this.gridSize = 10;
-        this.totalFoods = 40;
-        this.radius = true;
+        this.totalFoods = 10;
+        this.radius = false;
         this.foodSize = 5;
-        this.foods = {};
         this.init();
     }
 
@@ -36,12 +35,6 @@ class Board {
         this.setElementProps();
         this.newPlayer();
         this.initFoods();
-    }
-
-    initFood() {
-        for (let i = 0; i < this.totalFoods; i++) {
-            this.foods['food' + i] = new Food();
-        }
     }
 
     render() {
@@ -80,10 +73,13 @@ class Board {
         this.$el.append(ball.render().get(0));
     }
 
+    newFood() {
+        return new Food(this);
+    }
+
     initFoods() {
         for (let i = 0; i < this.totalFoods; i++) {
-            const food = new Food(i, this);
-            this.$el.append(food.render().get(0));            
+            this.$el.append(this.newFood().render().get(0));
         }
     }
 }

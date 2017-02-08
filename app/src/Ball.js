@@ -27,7 +27,6 @@ class Ball {
 
   setElementProps() {
     const factor = this.board.gridSize * this.size;
-    console.log(factor)
     this.$el.css({
         top: '100',
         left: '100',
@@ -43,7 +42,6 @@ class Ball {
 
   setElementSize() {
     const factor = this.size * this.board.gridSize;
-    console.log(factor);
     this.$el.css({
         width: factor,
         height: factor,
@@ -79,7 +77,6 @@ class Ball {
     
     // Make the movement.
     this.$el.css({top: curTop, left: curLeft});
-    this.setElementSize();
 
     // Colission detector.
     this.collisionDetector();
@@ -93,16 +90,32 @@ class Ball {
     this.foodCollisionDetector();
   }
 
+  checkTwoElsCollision($div1, $div2) {
+    const x1 = $div1.offset().left;
+    const y1 = $div1.offset().top;
+    const h1 = $div1.outerHeight(true);
+    const w1 = $div1.outerWidth(true);
+    const b1 = y1 + h1;
+    const r1 = x1 + w1;
+    const x2 = $div2.offset().left;
+    const y2 = $div2.offset().top;
+    const h2 = $div2.outerHeight(true);
+    const w2 = $div2.outerWidth(true);
+    const b2 = y2 + h2;
+    const r2 = x2 + w2;
+
+    if (b1 < y2 || y1 > b2 || r1 < x2 || x1 > r2) return false;
+    return true;
+  }
+
   foodCollisionDetector() {
       $('.ball').each((idx, ballEl) => {
-          const ballLeft = $(ballEl).position().left;
-          const ballTop = $(ballEl).position().top;
           $('.food').each((idx, foodEl) => {
-              const foodLeft = $(foodEl).position().left;
-              const foodTop = $(foodEl).position().top;
-              if (ballLeft === foodLeft && ballTop === foodTop) {
+              if (this.checkTwoElsCollision($(ballEl), $(foodEl))) {
+                $(foodEl).remove();
+                this.board.$el.append(this.board.newFood().render().get(0));
                 this.size += 1;
-                console.log('FOOOOODDD BOOOM');
+                this.setElementSize();
               }
           });
       });
@@ -125,10 +138,6 @@ class Ball {
       console.log('BOOOOOOMMM BOT');
     }
   }
-
- 
 }
-
-
 
 module.exports = Ball;

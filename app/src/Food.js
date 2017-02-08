@@ -1,7 +1,6 @@
 class Food {
 
-  constructor(id, board) {
-    this.id = id;
+  constructor(board) {
     this.$el = null;
     this.board = board;
     this.init();
