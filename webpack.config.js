@@ -3,7 +3,7 @@ const webpack = require('webpack');
 
 module.exports = {
   // entry: './app/src/main.jsx',
-  entry: ['webpack/hot/dev-server', './app/src/main.jsx'],
+  entry: ['webpack/hot/dev-server', './app/src/main.js'],
   output: {
     path: path.join(__dirname, 'build'),
     // Use the name specified in the entry key as name for the bundle file.
@@ -17,7 +17,7 @@ module.exports = {
     loaders: [
       {
         // Test for js or jsx files.
-        test: /\.jsx?$/,
+        test: /\.js?$/,
         loader: 'babel-loader',
         exclude: /node_modules/,
         query: {
