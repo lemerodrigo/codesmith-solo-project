@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
-let Snake = require('./Snake.jsx');
+let Ball = require('./Ball.jsx');
+let Food = require('./Food.jsx');
 
 class Board extends Component {
     constructor() {
@@ -10,25 +11,33 @@ class Board extends Component {
         this.totalBlocks = null;
         this.totalCols = null;
         this.totalRows = null;
-        this.blockSize = 10;
-        // this.setEvents();
+        this.ballSize = 20;
+        this.totalFoods = 50;
+        this.radius = true;
+        this.foodSize = 5;
         this.state = {
-            freeSlots: [],
-            busySlots: []
         };
+    }
+
+    foodsGenerator() {
+        let foods = [];
+        for (let i = 0; i < this.totalFoods; i++) {
+            foods.push(<Food key={i} id={'food' + i} foodSize={this.foodSize} boardWidth={this.boardWidth} boardHeight={this.boardHeight} ballSize={this.ballSize} radius={this.radius} />);
+        }
+        return foods;
     }
 
     render() {
 
         // Just getting the size of the window.
-        const dw = $(document).width();
-        const dh = $(document).height();
+        const dw = $(document).width() - 100;
+        const dh = $(document).height() - 100;
 
         // Just doing some math to adjust document size according to the block size.
-        this.boardWidth = dw - (dw % this.blockSize);
-        this.boardHeight = dh - (dh % this.blockSize);
-        this.totalCols = this.boardWidth / this.blockSize;
-        this.totalRows = this.boardHeight / this.blockSize;
+        this.boardWidth = dw - (dw % this.ballSize);
+        this.boardHeight = dh - (dh % this.ballSize);
+        this.totalCols = this.boardWidth / this.ballSize;
+        this.totalRows = this.boardHeight / this.ballSize;
         this.totalBlocks = this.totalCols * this.totalRows;
 
         // console.log(this.boardWidth, this.boardHeight, this.totalCols, this.totalRows, this.totalBlocks);
@@ -36,7 +45,8 @@ class Board extends Component {
         // Rendering the board.
         return (
             <div id="board">
-                <Snake id={'snake' + 1} blockSize={this.blockSize} />
+                <Ball id={'ball' + 1} ballSize={this.ballSize} boardWidth={this.boardWidth} boardHeight={this.boardHeight} radius={this.radius} />
+                {this.foodsGenerator()}
             </div>
         );
     }
@@ -57,59 +67,17 @@ class Board extends Component {
 
     setBoardPosition() {
         $('#board').css({
-            margin: 'auto',
+            margin: '50px auto',
             position: 'relative',
         });
     }
 
     setBoardBackground() {
         $('#board').css({
-            background: '#cccccc',
+            overflow: 'hidden',
+            background: '#000',
         });
     }
-
-    // All boards events are setted here.
-    setEvents() {
-        $('body').on('keydown', e => this.eventHandler(e));
-    }
-
-    // Event listener for user inputs.
-    // eventHandler(e) {
-    //     // Space key.
-    //     if (e.keyCode === 32) {
-    //         console.log('space');
-    //         // this.move.bind(this)();
-    //         // this.head.move();
-    //     }
-    //     // Left arrow key.
-    //     if (e.keyCode === 37) {
-    //         console.log('left');
-    //         // this.head.currentDirection = 'left';
-    //     }
-    //     // Right arrow key.
-    //     if (e.keyCode === 39) {
-    //         console.log('right');
-    //         // this.head.currentDirection = 'right';
-    //     }
-    //     // Up arrow key.
-    //     if (e.keyCode === 38) {
-    //         console.log('up');
-    //         // this.head.currentDirection = 'up';
-    //     }
-    //     // Down arrow key.
-    //     if (e.keyCode === 40) {
-    //         console.log('down');
-    //         // this.head.currentDirection = 'down';
-    //     }
-    // }
-
-    // append() {
-    //     let snake = {
-    //         el: <Snake key={"1"} snakeId={1} />,
-    //     };
-    //     console.log(snake.el);
-    //     $('#board').append(snake.el);
-    // }
 }
 
 module.exports = Board;
