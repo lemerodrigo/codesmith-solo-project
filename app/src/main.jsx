@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 
-var Game = require('./Game.jsx');
+var Board = require('./Board.jsx');
 
 render(
-  <Game />,
+  <Board />,
   document.getElementById('main-container')
 );
