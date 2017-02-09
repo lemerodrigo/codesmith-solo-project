@@ -1,3 +1,4 @@
+
 class Ball {
 
   constructor(id, name, board) {
@@ -14,24 +15,33 @@ class Ball {
       this.$el = $('<div />', {
           id: 'ball' + this.id,
           class: 'ball',
-          text: this.name,
+          // text: this.name,
       });
 
       this.setElementProps();
       this.setEvents();
+      // this.joinGame();
   }
 
   render() {
     return this.$el;
   }
 
+  getRandomColor() {
+    let rgb = [];
+    for (let i = 0; i < 3; i++) {
+        rgb.push(Math.floor(Math.random() * 255));
+    }
+    return rgb.join(',');
+  }
+
   setElementProps() {
     const factor = this.board.gridSize * this.size;
     this.$el.css({
-        top: '100',
-        left: '100',
+        top: this.board.getRandomTop(),
+        left: this.board.getRandomLeft(),
         position: 'absolute',
-        background: '#ccc',
+        background: 'rgb('+this.getRandomColor()+')',
         fontSize: (this.board.gridSize * this.size) / 2 + 'px',
         fontWeight: 'bold',
         fontFamily: 'Arial',
